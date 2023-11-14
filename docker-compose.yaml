@@ -1,0 +1,31 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "SqlServer2019!"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+
+  forma-pagamento-service:
+    build:
+      context: C:\Users\luiz_\Desktop\Garagens\GaragensStapar\FormaPagamentoService
+      dockerfile: Dockerfile
+    ports:
+      - "7179:7179"
+
+  garagens-service:
+    build: 
+       context: ./garagensService
+       dockerfile : Dockerfile
+    ports:
+      - "7141:7141"
+
+
+  passagens-service:
+    build: 
+       context: ./passagensService
+       dockerfile : Dockerfile
+    ports:
+      - "7191:7191"
